@@ -1,1 +1,77 @@
-<p>post works!</p>
+<p-card styleClass="bg-highlight">
+  <!-- Card Header: Title and Date -->
+  <ng-template pTemplate="header">
+    <div class="flex flex-col justify-start items-start p-3 w-[600px]">
+      <h2 class="text-2xl font-bold text-gray-800">{{ post.title }}</h2>
+      <div class="flex gap-1 items-center text-gray-500">
+        <em class="pi pi-calendar"></em>
+        <small class="text-sm text-gray-500">{{ post.date | date:'medium' }}</small>
+      </div>
+    </div>
+  </ng-template>
+  <!-- Card Body: Post Text and Like Button -->
+  <div class="p-4">
+    <p class="mb-4 text-gray-700">{{ post.text }}</p>
+    <div class="flex items-center mb-4">
+      <p-button [label]="post.likes.toString()" (onClick)="onLikePost()" text icon="pi pi-thumbs-up"></p-button>
+    </div>
+
+    <p-divider/>
+
+    <!-- Comments Section -->
+    @if (post.comments) {
+      @switch (post.comments.length) {
+        @case (0) {
+          <i class="text-xs text-muted-color">no comments...:(</i>
+          <!-- Optionally, nothing is rendered if there are no comments -->
+        }
+        @case (1) {
+          <div class="border-l-4 border-gray-300 pl-3">
+            <p class="text-muted-color">{{ post.comments[0].text }}</p>
+            <div class="flex justify-between text-xs text-gray-500">
+              <span>{{ post.comments[0].date | date:'short' }}</span>
+              <p-button [label]="post.comments[0].likes.toString()" (onClick)="onLikeComment(post.comments[0])" text icon="pi pi-thumbs-up" />
+            </div>
+          </div>
+        }
+        @default {
+          <!-- Always show the highest liked comment with a brown/golden border -->
+          <div class="border-l-4 border-yellow-600 pl-3">
+            <p class="text-muted-color	">{{ highestComment?.text }}</p>
+            <div class="flex justify-between text-xs text-muted-color">
+              <span>{{ highestComment?.date | date:'short' }}</span>
+              @if (highestComment) {
+                <p-button [label]="highestComment.likes.toString()" (onClick)="onLikeComment(highestComment)" text icon="pi pi-thumbs-up" />
+              }
+            </div>
+          </div>
+          <!-- Toggle Button for Other Comments -->
+          <div class="mt-2">
+            <button (click)="toggleComments()" class="text-blue-500 text-sm focus:outline-none">
+              {{ showAllComments() ? 'Hide other comments' : 'Show other comments (' + otherComments.length + ')' }}
+            </button>
+          </div>
+          <!-- Render additional comments when toggled -->
+          @if (showAllComments()) {
+            @for (comment of otherComments; track $index) {
+              <div class="border-l-4 border-gray-300 pl-3 mt-2">
+                <p class="text-muted-color">{{ comment.text }}</p>
+                <div class="flex justify-between text-xs text-muted-color">
+                  <span>{{ comment.date | date:'short' }}</span>
+                  <p-button [label]="comment.likes.toString()" (onClick)="onLikeComment(comment)" text icon="pi pi-thumbs-up" />
+                </div>
+              </div>
+            }
+          }
+        }
+      }
+    }
+  </div>
+  <!-- Input for adding a comment -->
+  <div class="mt-4">
+    <input type="text" [(ngModel)]="newCommentText" placeholder="Add your comment..." class="p-2 border rounded w-full" />
+    <button (click)="onAddComment(post)" class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">
+      Add Comment
+    </button>
+  </div>
+</p-card>
