@@ -1,17 +1,27 @@
 <!-- feed.component.html -->
-<div class="flex flex-col gap-2 justify-center items-center w-full h-full relative">
-  <div class="card p-4">
-    <input
-      type="text"
-      placeholder="Post title"
-      [(ngModel)]="newPostTitle"
-      class="w-full mb-2"
-    >
-    <textarea
-      placeholder="Post content"
-      [(ngModel)]="newPostText"
-      class="w-full h-32"
-    ></textarea>
+<div class="bg-surface flex flex-col gap-2 justify-center items-center w-full h-full relative">
+  <div class="card p-4 w-1/2">
+    <p-iftalabel>
+      <label for="title">Title</label>
+      <input
+        fluid
+        type="text"
+        id="title"
+        pInputText
+        [(ngModel)]="newPostTitle"
+        class="w-full mb-2"
+      >
+    </p-iftalabel>
+    <p-iftalabel>
+      <label for="content">Content</label>
+      <textarea
+        fluid
+        pTextarea
+        id="content"
+        [(ngModel)]="newPostText"
+        class="w-full h-32"
+      ></textarea>
+    </p-iftalabel>
 
     @if (postsStore.error()) {
       <p class="text-red-500 mb-2">{{ postsStore.error()?.message }}</p>

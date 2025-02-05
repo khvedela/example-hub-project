@@ -12,6 +12,8 @@ import {Skeleton} from 'primeng/skeleton';
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Scroller, ScrollerLazyLoadEvent} from 'primeng/scroller';
 import {NgClass} from '@angular/common';
+import {InputText} from 'primeng/inputtext';
+import {IftaLabel} from 'primeng/iftalabel';
 
 @Component({
   selector: 'app-feed',
@@ -27,7 +29,9 @@ import {NgClass} from '@angular/common';
     Skeleton,
     ProgressSpinner,
     Scroller,
-    NgClass
+    NgClass,
+    InputText,
+    IftaLabel
   ],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss'

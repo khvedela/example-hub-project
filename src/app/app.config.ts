@@ -7,6 +7,7 @@ import {MyPreset} from "./theme"
 import {provideHttpClient} from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     providePrimeNG({
       theme: {
-        preset: MyPreset,
+        preset: Aura,
         options: {
           darkModeSelector: '.dark',
           cssLayer: {

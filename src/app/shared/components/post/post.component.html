@@ -2,7 +2,7 @@
   <!-- Card Header: Title and Date -->
   <ng-template pTemplate="header">
     <div class="flex flex-col justify-start items-start p-3 w-[600px]">
-      <h2 class="text-2xl font-bold text-gray-800">{{ post.title }}</h2>
+      <h2 class="text-2xl font-bold text-color">{{ post.title }}</h2>
       <div class="flex gap-1 items-center text-gray-500">
         <em class="pi pi-calendar"></em>
         <small class="text-sm text-gray-500">{{ post.date | date:'medium' }}</small>
@@ -11,7 +11,7 @@
   </ng-template>
   <!-- Card Body: Post Text and Like Button -->
   <div class="p-4">
-    <p class="mb-4 text-gray-700">{{ post.text }}</p>
+    <p class="mb-4 text-muted-color-emphasis">{{ post.text }}</p>
     <div class="flex items-center mb-4">
       <p-button [label]="post.likes.toString()" (onClick)="onLikePost()" text icon="pi pi-thumbs-up"></p-button>
     </div>
@@ -68,10 +68,11 @@
     }
   </div>
   <!-- Input for adding a comment -->
-  <div class="mt-4">
-    <input type="text" [(ngModel)]="newCommentText" placeholder="Add your comment..." class="p-2 border rounded w-full" />
-    <button (click)="onAddComment(post)" class="mt-2 bg-blue-500 text-white py-1 px-3 rounded">
-      Add Comment
-    </button>
+  <div class="flex flex-row gap-1 mt-4 w-full">
+    <p-iftalabel class="w-full">
+      <label for="comment">Add your comment...</label>
+      <input fluid id="comment" class="w-full" pInputText type="text" [(ngModel)]="newCommentText" />
+    </p-iftalabel>
+    <p-button (onClick)="onAddComment(post)" label="comment" severity="primary" outlined />
   </div>
 </p-card>

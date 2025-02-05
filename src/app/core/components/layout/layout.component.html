@@ -1,17 +1,23 @@
 <main class="px-4 py-2">
   <nav>
-    <p-megaMenu [model]="items" styleClass="bg-surface">
+    <p-megaMenu [model]="items">
       <ng-template #start>
         <h1 class="font-bold text-xl">EH</h1>
       </ng-template>
       <ng-template #item let-item>
         <div class="cursor-pointer flex items-center gap-1 py-2 px-4 select-none">
           <em [class]="item.icon"></em>
-          <span>{{ item.label }}</span>
+          <span class="text-color">{{ item.label }}</span>
         </div>
       </ng-template>
       <ng-template #end>
-        me
+        @if (layoutStore.isDark()) {
+          <p-button icon="pi pi-moon" (onClick)="layoutStore.toggleDarkMode()" aria-label="Save" />
+        }
+
+        @if (layoutStore.isLight()) {
+          <p-button icon="pi pi-sun" (onClick)="layoutStore.toggleDarkMode()" aria-label="Save" />
+        }
       </ng-template>
     </p-megaMenu>
   </nav>

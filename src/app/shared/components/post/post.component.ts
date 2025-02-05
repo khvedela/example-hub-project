@@ -7,6 +7,8 @@ import {Button} from 'primeng/button';
 import {PostsStore} from '../../state/posts.store';
 import {Divider} from 'primeng/divider';
 import {FormsModule} from '@angular/forms';
+import {InputText} from 'primeng/inputtext';
+import {IftaLabel} from 'primeng/iftalabel';
 
 @Component({
   selector: 'app-post',
@@ -16,7 +18,9 @@ import {FormsModule} from '@angular/forms';
     DatePipe,
     Button,
     Divider,
-    FormsModule
+    FormsModule,
+    InputText,
+    IftaLabel
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'

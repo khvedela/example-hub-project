@@ -6,7 +6,6 @@ import {rxMethod} from '@ngrx/signals/rxjs-interop';
 import {pipe, switchMap, tap} from 'rxjs';
 import {tapResponse} from '@ngrx/operators';
 import {MessageService} from 'primeng/api';
-import {HttpClient} from '@angular/common/http';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {ResponseBody} from '../models/responseBody';
 
